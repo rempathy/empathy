@@ -804,28 +804,28 @@ function sendQuickEmotion(recipientId) {
       metadata: "DEVELOPER_DEFINED_METADATA",
       quick_replies: [
         {
-          "content_type":"😡",
-          "title":"Angry",
+          "content_type":"text",
+          "title":"😡",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
         },
         {
-          "content_type":"😂",
-          "title":"Comedy",
+          "content_type":"text",
+          "title":"😂",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
         },
         {
-          "content_type":"😒",
-          "title":"Incredulous",
+          "content_type":"text",
+          "title":"😒",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
         },
         {
-          "content_type":"😭",
-          "title":"Crying",
+          "content_type":"text",
+          "title":"😭",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
         },
         {
-          "content_type":"😊",
-          "title":"Smily",
+          "content_type":"text",
+          "title":"😊",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
         },
       ]
