@@ -326,6 +326,10 @@ function receivedMessage(event) {
         sendEmotionQuery(senderID);
         break;
 
+      case 'quickemotion':
+        sendQuickEmotion(senderID);
+        break;
+
       case 'button':
         sendButtonMessage(senderID);
         break;
@@ -359,34 +363,8 @@ function receivedMessage(event) {
         break;
 
       default:
-
         sendTextMessage(senderID, messageText);
-        
-
-        // wit.runActions(
-        //   findOrCreateSession(senderID), // grabbing session ID or generating one?
-        //   messageText,
-        //   sessions[sessionId].context, // the user's session state
-        //     function (error, context) { // callback
-        //       if (error) {
-        //         console.log('oops!', error)
-        //       } else {
-        //       // Wit.ai ran all the actions
-        //       // Now it needs more messages
-        //         console.log('Waiting for further messages')
-
-        //       // Based on the session state, you might want to reset the session
-        //       // Example:
-        //       // if (context['done']) {
-        //       //  delete sessions[sessionId]
-        //       // }
-
-        //       // Updating the user's current session state
-        //       sessions[sessionId].context = context
-        //       }
-        //     }
-        //   );
-        
+                
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -663,7 +641,7 @@ function sendEmotionQuery(recipientId) {
           buttons:[{
             type: "web_url",
             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "Sad"
+            title: "😡"
           },
           {
             type: "phone_number",
@@ -673,7 +651,17 @@ function sendEmotionQuery(recipientId) {
           {
             type: "web_url",
             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "ANGR"
+            title: "😒"
+          }, 
+          {
+            type: "web_url",
+            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+            title: "😍"
+          },
+          {
+            type: "web_url",
+            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+            title: "😭"
           }]
         }
       }
@@ -805,6 +793,48 @@ function sendReceiptMessage(recipientId) {
 
   callSendAPI(messageData);
 }
+
+function sendQuickEmotion(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Which emoji represents your current emotion?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"😡",
+          "title":"Angry",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"😂",
+          "title":"Comedy",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"😒",
+          "title":"Incredulous",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        },
+        {
+          "content_type":"😭",
+          "title":"Crying",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"😊",
+          "title":"Smily",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
 
 /*
  * Send a message with Quick Reply buttons.
