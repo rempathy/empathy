@@ -976,8 +976,8 @@ function callSendAPI(messageData) {
         recipientId);
       }
     } else {
-      console.log("IN ELSE BLOCK!!! ")
-      console.log("RESPONSE IS ", response);
+      // console.log("IN ELSE BLOCK!!! ")
+      // console.log("RESPONSE IS ", response);
       console.error(response.error);
     }
   });  
