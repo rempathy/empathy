@@ -668,7 +668,7 @@ function sendEmotionQuery(recipientId) {
           {
             type: "postback",
             title: "ANGRY",
-            payload: "STRING>>>"
+            payload: "STRING>  >>"
           }, 
           {
             type: "phone_number",
