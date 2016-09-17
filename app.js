@@ -664,12 +664,7 @@ function sendEmotionQuery(recipientId) {
             type: "web_url",
             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
             title: "Sad"
-          }, 
-          {
-            type: "postback",
-            title: "ANGRY",
-            payload: "STRING>  >>"
-          }, 
+          },
           {
             type: "phone_number",
             title: "Suicidal",
@@ -952,6 +947,7 @@ function callSendAPI(messageData) {
       }
     } else {
       console.log("IN ELSE BLOCK!!! ")
+      console.log("RESPONSE IS ", response);
       console.error(response.error);
     }
   });  
