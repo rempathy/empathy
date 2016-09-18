@@ -16,8 +16,8 @@ const
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),  
-  request = require('request'),
-  helpers = require('helper_functions');
+  request = require('request');
+  // helpers = require('helper_functions');
   // Wit = require('node-wit').Wit;
 
 
