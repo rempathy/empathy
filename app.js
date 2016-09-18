@@ -281,31 +281,34 @@ function receivedMessage(event) {
     var assets = {
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANGER: function sendAngerResponse(recipientID){
   
-        // getDots(recipientID);
+        getDots(recipientID);
         sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
-        // getDots(recipientID);
+        getDots(recipientID);
         setTimeout(function(){ sendBreathingQuery(recipientID)}, 1000);
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP: function sendBreathingExercise(recipientID){
+        getDots(recipientID);
         sendTextMessage(recipientID, "Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.");
         setTimeout(function(){
+          getDots(recipientID);
           sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
           setTimeout(function(){
+            getDots(recipientID);
             sendTextMessage(recipientID, "Place one hand on your belly and repeat 5 more times. Easy peasy.");
             setTimeout(function(){
               sendHelpfulQuery(recipientID);
             }, 5000);
-          },3000)
-        },4500)
+          },3000);
+        },4500);
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES: function(recipientID){
         sendTextMessage(recipientID, "Doctors say it best: slowing your breathing calms your emotions.");
         sendMeditationGif(recipientID);
-        setTimeout(function(){sendCheckUpQuery(recipientID);}, 2000);
+        setTimeout(function(){sendCheckUpQuery(recipientID);}, 3000);
 
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP: function(recipientID){
-        sendTextMessage(recipientID, "🎅");
+        sendTextMessage(recipientID, "See you soon");
       }
     };
 
@@ -392,7 +395,7 @@ function getDots(senderId){
   sendTypingOn(senderId);
   setTimeout(function(){
     sendTypingOff(senderId);
-  }, 1900);
+  }, 4000);
 }
 /*
  * Postback Event
@@ -958,7 +961,7 @@ function sendInitialResponse(recipientID){
   // console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
   getDots(recipientID);
-  setTimeout(function(){sendQuickEmotion(recipientID)}, 1000);
+  setTimeout(function(){sendQuickEmotion(recipientID)}, 2000);
 }
 
 /*
