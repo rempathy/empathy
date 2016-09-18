@@ -88,5 +88,5 @@ module.exports = {
   chooseRemedy: chooseRemedy,
   accessCard: accessCard,
   getRemedy: getRemedy,
-  getMoreInfo: getMoreInfo;
-}
+  getMoreInfo: getMoreInfo
+};

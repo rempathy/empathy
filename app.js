@@ -17,8 +17,8 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request'),
-  helpers = require('helper_functions'),
-  stories = require('stories');
+  helpers = require('./helper_functions.js'),
+  stories = require('./stories');
   // Wit = require('node-wit').Wit;
 
 
