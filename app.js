@@ -303,6 +303,9 @@ function receivedMessage(event) {
           console.log("sender", senderId);
 
         },
+        DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA: function sendText2 (senderId){
+          console.log("SOMETHIGN WHATVER LOL")
+        }
 
       };
       // When a postback is called, we'll send a message back to the sender to 
