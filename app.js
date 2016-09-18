@@ -928,7 +928,7 @@ function sendTypingOff(recipientId) {
 function sendInitialResponse(recipientID){
   console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
-  sendQuickEmotion(recipientID);
+  setTimeout(function(){sendQuickEmotion(recipientID)}, 3000);
 }
 
 /*
