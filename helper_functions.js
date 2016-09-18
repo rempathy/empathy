@@ -78,9 +78,10 @@ var getQuote = function(card) {
 
 module.exports = {
   emotions: emotions,
-  accessEmotion: accessEmotion,
-  chooseRemedy: chooseRemedy,
-  accessCard: accessCard,
+  randomRemedy: randomRemedy,
+  getCard: getCard,
+  getIntro: getIntro,
   getRemedy: getRemedy,
-  getMoreInfo: getMoreInfo
+  getMoreInfo: getMoreInfo,
+  getQuote: getQuote
 };
