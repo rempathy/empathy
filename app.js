@@ -284,6 +284,15 @@ function receivedMessage(event) {
         getDots(recipientID);
         sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
         getDots(recipientID);
+      },
+      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP: function sendBreathingExercise(recipientID){
+        sendTextMessage(recipientID, "Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.");
+        setTimeout(function(){
+          sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
+          setTimeout(function(){
+            sendTextMessage(recipientID, "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy.");
+          },1500)
+        },1000)
       }
     };
 
@@ -634,9 +643,12 @@ function sendButtonMessage(recipientId) {
   callSendAPI(messageData);
 }
 
-// function sendEmotionQuery(recipientId) {
-//   console.log("SENDEMTIONQUERY INVOKED, recipientID", recipientId);
 
+// /*
+//  * Send a Structured Message (Generic Message type) using the Send API.
+//  *
+//  */
+// function sendGenericMessage(recipientId) {
 //   var messageData = {
 //     recipient: {
 //       id: recipientId
@@ -645,97 +657,43 @@ function sendButtonMessage(recipientId) {
 //       attachment: {
 //         type: "template",
 //         payload: {
-//           template_type: "button",
-//           text: "How are you feeling?",
-//           buttons:[{
-//             type: "web_url",
-//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-//             title: "😡"
-//           },
-//           {
-//             type: "phone_number",
-//             title: "Suicidal",
-//             payload: "+18002738255"
-//           },
-//           {
-//             type: "web_url",
-//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-//             title: "😒"
-//           }, 
-//           {
-//             type: "web_url",
-//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-//             title: "😍"
-//           },
-//           {
-//             type: "web_url",
-//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-//             title: "😭"
+//           template_type: "generic",
+//           elements: [{
+//             title: "rift",
+//             subtitle: "Next-generation virtual reality",
+//             item_url: "https://www.oculus.com/en-us/rift/",               
+//             image_url: SERVER_URL + "/assets/rift.png",
+//             buttons: [{
+//               type: "web_url",
+//               url: "https://www.oculus.com/en-us/rift/",
+//               title: "Open Web URL"
+//             }, {
+//               type: "postback",
+//               title: "Call Postback",
+//               payload: "Payload for first bubble",
+//             }],
+//           }, {
+//             title: "touch",
+//             subtitle: "Your Hands, Now in VR",
+//             item_url: "https://www.oculus.com/en-us/touch/",               
+//             image_url: SERVER_URL + "/assets/touch.png",
+//             buttons: [{
+//               type: "web_url",
+//               url: "https://www.oculus.com/en-us/touch/",
+//               title: "Open Web URL"
+//             }, {
+//               type: "postback",
+//               title: "Call Postback",
+//               payload: "Payload for second bubble",
+//             }]
 //           }]
 //         }
 //       }
 //     }
 //   };  
 
-//   console.log(messageData);
-
 //   callSendAPI(messageData);
 // }
-
-
-/*
- * Send a Structured Message (Generic Message type) using the Send API.
- *
- */
-function sendGenericMessage(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [{
-            title: "rift",
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",               
-            image_url: SERVER_URL + "/assets/rift.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
-            }],
-          }, {
-            title: "touch",
-            subtitle: "Your Hands, Now in VR",
-            item_url: "https://www.oculus.com/en-us/touch/",               
-            image_url: SERVER_URL + "/assets/touch.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/touch/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for second bubble",
-            }]
-          }]
-        }
-      }
-    }
-  };  
-
-  
-
-
-  callSendAPI(messageData);
-}
 
 /*
  * Send a receipt message using the Send API.
@@ -834,6 +792,33 @@ function sendQuickEmotion(recipientId) {
   callSendAPI(messageData);
 }
 
+function sendBreathingQuery(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Do you want me to walk you through a breathing exercise?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"👍",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP"
+        },
+        {
+          "content_type":"text",
+          "title":"👎",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_DOWN"
+        }
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+
 
 // /*
 //  * Send a message with Quick Reply buttons.
@@ -922,10 +907,10 @@ function sendTypingOff(recipientId) {
 }
 
 function sendInitialResponse(recipientID){
-  console.log("SEND INTIIAL RESponse, recipientID", recipientID);
+  // console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
   getDots(recipientID);
-  setTimeout(function(){sendQuickEmotion(recipientID)}, 3000);
+  setTimeout(function(){sendQuickEmotion(recipientID)}, 1000);
 }
 
 /*
