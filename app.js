@@ -292,8 +292,14 @@ function receivedMessage(event) {
           sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
           setTimeout(function(){
             sendTextMessage(recipientID, "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy.");
-          },1500)
-        },1000)
+            sendTimeout(function(){
+              sendHelpfulQuery(recipientID);
+            })
+          },2500)
+        },4000)
+      },
+      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES: function(recipientID){
+        sendTextMessage(recipientID, "Doctors say whatever");
       }
     };
 
@@ -311,22 +317,6 @@ function receivedMessage(event) {
       case 'image':
         sendImageMessage(senderID);
         break;
-
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
-
-      // case 'audio':
-      //   sendAudioMessage(senderID);
-      //   break;
-
-      // case 'video':
-      //   sendVideoMessage(senderID);
-      //   break;
-
-      // case 'file':
-      //   sendFileMessage(senderID);
-      //   break;
 
       case 'I hate my ex':
         sendInitialResponse(senderID);
@@ -355,22 +345,6 @@ function receivedMessage(event) {
       case 'quick reply':
         sendQuickReply(senderID);
         break;        
-
-      // case 'read receipt':
-      //   sendReadReceipt(senderID);
-      //   break;        
-
-      // case 'typing on':
-      //   sendTypingOn(senderID);
-      //   break;        
-
-      // case 'typing off':
-      //   sendTypingOff(senderID);
-      //   break;        
-
-      // case 'account linking':
-      //   sendAccountLinking(senderID);
-      //   break;
 
       default:
         sendTextMessage(senderID, messageText);
@@ -819,7 +793,31 @@ function sendBreathingQuery(recipientId) {
   callSendAPI(messageData);
 }
 
+function sendHelpfulQuery(recipientID){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Was that helpful?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"👍",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES"
+        },
+        {
+          "content_type":"text",
+          "title":"👎",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_NO"
+        }
+      ]
+    }
+  };
 
+  callSendAPI(messageData);
+}
 
 // /*
 //  * Send a message with Quick Reply buttons.
