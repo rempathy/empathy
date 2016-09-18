@@ -296,9 +296,9 @@ function receivedMessage(event) {
 
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
-          sendTypingOn(recipientID);
+          sendTypingOn(senderID);
           setTimeout(function() {
-            sendTypingOff(recipientID)
+            sendTypingOff(senderID)
           }, 1000)
 
 
