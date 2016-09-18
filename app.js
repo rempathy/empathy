@@ -282,9 +282,9 @@ function receivedMessage(event) {
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANGER: function sendAngerResponse(recipientID){
   
         getDots(recipientID);
-        sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
+        setTimeout(function(){sendTextMessage(recipientID, "Taking deep breaths has been shown to help...")},2000);
         getDots(recipientID);
-        setTimeout(function(){ sendBreathingQuery(recipientID)}, 1000);
+        setTimeout(function(){ sendBreathingQuery(recipientID)}, 3000);
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP: function sendBreathingExercise(recipientID){
         getDots(recipientID);
