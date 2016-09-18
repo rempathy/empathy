@@ -801,14 +801,14 @@ function sendCheckUpQuery(recipientId){
       quick_replies: [
         {
           "content_type":"text",
-          "title":"✅",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP"
+          "title":"❌",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_DOWN"
         },
         {
           "content_type":"text",
-          "title":"❌",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_DOWN"
-        }
+          "title":"✅",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP"
+        },
       ]
     }
   };
