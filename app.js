@@ -18,17 +18,7 @@ const
   https = require('https'),  
   request = require('request');
   // helpers = require('helper_functions');
-  // Wit = require('node-wit').Wit;
 
-
-// function getWit() {
-//   console.log("GETTING WIT");
-//   var wit = new Wit({accessToken:'WZMAOOFNIKENC3K6RSLDHKYAT3272C4X'});
-//   console.log("wit:", wit);
-//   return wit;
-// }
-
-// var wit = getWit();
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
@@ -41,10 +31,6 @@ app.use(express.static('public'));
  * set them using environment variables or modifying the config file in /config.
  *
  */
-
-const WIT_TOKEN = (process.env.WIT_TOKEN) ? 
-  process.env.WIT_TOKEN :
-  config.get('witToken');
 
 
 // App Secret can be retrieved from the App Dashboard
@@ -219,34 +205,34 @@ function receivedAuthentication(event) {
   sendTextMessage(senderID, "Authentication successful");
 }
 
-// LETS SAVE USER SESSIONS
-var sessions = {}
+// // LETS SAVE USER SESSIONS
+// var sessions = {}
 
 
-var findOrCreateSession = function (fbid) {
-  var sessionId
+// var findOrCreateSession = function (fbid) {
+//   var sessionId
 
-  // DOES USER SESSION ALREADY EXIST?
-  Object.keys(sessions).forEach(k => {
-    if (sessions[k].fbid === fbid) {
-      // YUP
-      sessionId = k
-    }
-  })
+//   // DOES USER SESSION ALREADY EXIST?
+//   Object.keys(sessions).forEach(k => {
+//     if (sessions[k].fbid === fbid) {
+//       // YUP
+//       sessionId = k
+//     }
+//   })
 
-  // No session so we will create one
-  if (!sessionId) {
-    sessionId = new Date().toISOString()
-    sessions[sessionId] = {
-      fbid: fbid,
-      context: {
-        _fbid_: fbid
-      }
-    }
-  }
+//   // No session so we will create one
+//   if (!sessionId) {
+//     sessionId = new Date().toISOString()
+//     sessions[sessionId] = {
+//       fbid: fbid,
+//       context: {
+//         _fbid_: fbid
+//       }
+//     }
+//   }
 
-  return sessionId
-};
+//   return sessionId
+// };
 
 /*
  * Message Event
@@ -310,16 +296,20 @@ function receivedMessage(event) {
         sendGifMessage(senderID);
         break;
 
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
+      // case 'audio':
+      //   sendAudioMessage(senderID);
+      //   break;
 
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
+      // case 'video':
+      //   sendVideoMessage(senderID);
+      //   break;
 
-      case 'file':
-        sendFileMessage(senderID);
+      // case 'file':
+      //   sendFileMessage(senderID);
+      //   break;
+
+      case 'I hate my ex':
+        sendInitialResponse(senderID);
         break;
 
       case 'emotion':
@@ -346,21 +336,21 @@ function receivedMessage(event) {
         sendQuickReply(senderID);
         break;        
 
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;        
+      // case 'read receipt':
+      //   sendReadReceipt(senderID);
+      //   break;        
 
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;        
+      // case 'typing on':
+      //   sendTypingOn(senderID);
+      //   break;        
 
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;        
+      // case 'typing off':
+      //   sendTypingOff(senderID);
+      //   break;        
 
-      case 'account linking':
-        sendAccountLinking(senderID);
-        break;
+      // case 'account linking':
+      //   sendAccountLinking(senderID);
+      //   break;
 
       default:
         sendTextMessage(senderID, messageText);
@@ -422,11 +412,11 @@ function receivedPostback(event) {
   var assets = {
     DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
 
-      sendQuickEmotion(recipientID);
+      // sendQuickEmotion(recipientID);
       console.log("Within the SendText for COMEDY PAYLOAD");
       console.log("recipient", recipientID);
       console.log("sender", senderId);
-      
+      sendTextMessage(recipientID, "comedy selected");      
     }
   };
   // When a postback is called, we'll send a message back to the sender to 
@@ -849,57 +839,57 @@ function sendQuickEmotion(recipientId) {
 }
 
 
-/*
- * Send a message with Quick Reply buttons.
- *
- */
-function sendQuickReply(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: "What's your favorite movie genre?",
-      metadata: "DEVELOPER_DEFINED_METADATA",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"Action",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-        },
-        {
-          "content_type":"text",
-          "title":"Comedy",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Drama",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
-      ]
-    }
-  };
+// /*
+//  * Send a message with Quick Reply buttons.
+//  *
+//  */
+// function sendQuickReply(recipientId) {
+//   var messageData = {
+//     recipient: {
+//       id: recipientId
+//     },
+//     message: {
+//       text: "What's your favorite movie genre?",
+//       metadata: "DEVELOPER_DEFINED_METADATA",
+//       quick_replies: [
+//         {
+//           "content_type":"text",
+//           "title":"Action",
+//           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+//         },
+//         {
+//           "content_type":"text",
+//           "title":"Comedy",
+//           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+//         },
+//         {
+//           "content_type":"text",
+//           "title":"Drama",
+//           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+//         }
+//       ]
+//     }
+//   };
 
-  callSendAPI(messageData);
-}
+//   callSendAPI(messageData);
+// }
 
-/*
- * Send a read receipt to indicate the message has been read
- *
- */
-function sendReadReceipt(recipientId) {
-  console.log("Sending a read receipt to mark message as seen");
+// /*
+//  * Send a read receipt to indicate the message has been read
+//  *
+//  */
+// function sendReadReceipt(recipientId) {
+//   console.log("Sending a read receipt to mark message as seen");
 
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    sender_action: "mark_seen"
-  };
+//   var messageData = {
+//     recipient: {
+//       id: recipientId
+//     },
+//     sender_action: "mark_seen"
+//   };
 
-  callSendAPI(messageData);
-}
+//   callSendAPI(messageData);
+// }
 
 /*
  * Turn typing indicator on
@@ -935,32 +925,38 @@ function sendTypingOff(recipientId) {
   callSendAPI(messageData);
 }
 
+function sendInitialResponse(recipientID){
+  console.log("SEND INTIIAL RESponse, recipientID", recipientID);
+  sendTextMessage(recipientID, "Sorry to hear that.");
+  sendQuickEmotion(recipientID);
+}
+
 /*
  * Send a message with the account linking call-to-action
  *
  */
-function sendAccountLinking(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: "Welcome. Link your account.",
-          buttons:[{
-            type: "account_link",
-            url: SERVER_URL + "/authorize"
-          }]
-        }
-      }
-    }
-  };  
+// function sendAccountLinking(recipientId) {
+//   var messageData = {
+//     recipient: {
+//       id: recipientId
+//     },
+//     message: {
+//       attachment: {
+//         type: "template",
+//         payload: {
+//           template_type: "button",
+//           text: "Welcome. Link your account.",
+//           buttons:[{
+//             type: "account_link",
+//             url: SERVER_URL + "/authorize"
+//           }]
+//         }
+//       }
+//     }
+//   };  
 
-  callSendAPI(messageData);
-}
+//   callSendAPI(messageData);
+// }
 
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll 
