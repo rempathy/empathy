@@ -306,7 +306,7 @@ function receivedMessage(event) {
       // When a postback is called, we'll send a message back to the sender to 
       // let them know it was successful
 
-      assets[payload](senderID);
+      assets[quickReplyPayload](senderID);
     // sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
