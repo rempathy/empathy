@@ -17,7 +17,8 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request'),
-  helpers = require('helper_functions');
+  helpers = require('./helper_functions.js'),
+  stories = require('./stories');
   // Wit = require('node-wit').Wit;
 
 
@@ -73,11 +74,6 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
   process.exit(1);
 }
 
-
-// app.get('/', (req, res) => {
-//   res.send("this is empathybot server");
-
-// });
 
 /*
  * Use your own validation token. Check that the token used in the Webhook 
@@ -297,7 +293,26 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    sendTextMessage(senderID, "Quick reply tapped");
+
+      var assets = {
+        DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
+
+          sendQuickEmotion(senderId);
+          console.log("Within the SendText for COMEDY PAYLOAD");
+          console.log("recipient", recipientID);
+          console.log("sender", senderId);
+
+        },
+        DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA: function sendText2 (senderId){
+          console.log("SOMETHIGN WHATVER LOL")
+        }
+
+      };
+      // When a postback is called, we'll send a message back to the sender to 
+      // let them know it was successful
+
+      assets[quickReplyPayload](senderID);
+    // sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
 
@@ -329,6 +344,10 @@ function receivedMessage(event) {
 
       case 'emotion':
         sendEmotionQuery(senderID);
+        break;
+
+      case 'quickemotion':
+        sendQuickEmotion(senderID);
         break;
 
       case 'button':
@@ -364,34 +383,8 @@ function receivedMessage(event) {
         break;
 
       default:
-
         sendTextMessage(senderID, messageText);
-        
-
-        // wit.runActions(
-        //   findOrCreateSession(senderID), // grabbing session ID or generating one?
-        //   messageText,
-        //   sessions[sessionId].context, // the user's session state
-        //     function (error, context) { // callback
-        //       if (error) {
-        //         console.log('oops!', error)
-        //       } else {
-        //       // Wit.ai ran all the actions
-        //       // Now it needs more messages
-        //         console.log('Waiting for further messages')
-
-        //       // Based on the session state, you might want to reset the session
-        //       // Example:
-        //       // if (context['done']) {
-        //       //  delete sessions[sessionId]
-        //       // }
-
-        //       // Updating the user's current session state
-        //       sessions[sessionId].context = context
-        //       }
-        //     }
-        //   );
-        
+                
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -447,6 +440,7 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
+
   sendTextMessage(senderID, "Postback called");
 }
 
@@ -668,13 +662,8 @@ function sendEmotionQuery(recipientId) {
           buttons:[{
             type: "web_url",
             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "Sad"
-          }, 
-          {
-            type: "postback",
-            title: "ANGRY",
-            payload: "STRING>>>"
-          }, 
+            title: "😡"
+          },
           {
             type: "phone_number",
             title: "Suicidal",
@@ -683,7 +672,17 @@ function sendEmotionQuery(recipientId) {
           {
             type: "web_url",
             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "ANGR"
+            title: "😒"
+          }, 
+          {
+            type: "web_url",
+            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+            title: "😍"
+          },
+          {
+            type: "web_url",
+            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+            title: "😭"
           }]
         }
       }
@@ -816,6 +815,48 @@ function sendReceiptMessage(recipientId) {
   callSendAPI(messageData);
 }
 
+function sendQuickEmotion(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Which emoji represents your current emotion?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"😡",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"😂",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"😒",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        },
+        {
+          "content_type":"text",
+          "title":"😭",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"😊",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+
 /*
  * Send a message with Quick Reply buttons.
  *
@@ -863,6 +904,47 @@ function sendReadReceipt(recipientId) {
       id: recipientId
     },
     sender_action: "mark_seen"
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendQuickEmotion(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Which emoji represents your current emotion?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"😡",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+        },
+        {
+          "content_type":"text",
+          "title":"😂",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"😒",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+        },
+        {
+          "content_type":"text",
+          "title":"😭",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+        {
+          "content_type":"text",
+          "title":"😊",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+        },
+      ]
+    }
   };
 
   callSendAPI(messageData);
@@ -935,6 +1017,7 @@ function sendAccountLinking(recipientId) {
  *
  */
 function callSendAPI(messageData) {
+  console.log("IN CALLSENDAPI !!!");
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -942,10 +1025,11 @@ function callSendAPI(messageData) {
     json: messageData
 
   }, function (error, response, body) {
+    console.log("IN CALLSENDAPI CALLBACK!!!");
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
-
+      console.log("IN IF BLOCK!!!")
       if (messageId) {
         console.log("Successfully sent message with id %s to recipient %s", 
           messageId, recipientId);
@@ -954,6 +1038,8 @@ function callSendAPI(messageData) {
         recipientId);
       }
     } else {
+      // console.log("IN ELSE BLOCK!!! ")
+      // console.log("RESPONSE IS ", response);
       console.error(response.error);
     }
   });  
