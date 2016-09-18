@@ -10,9 +10,21 @@ var emotions = {
         ["Think of one of your role models. Ask yourself: 'What would they do right now?'"],
         ["Let their wisdom be your wisdom."],
         ["Changing your perspective can shift your energy!"]
+      ],
+      [
+        ["Where’s your favorite place to be?"],
+        ["Imagine you’re there right now...", "Think of all the things you love about it, and how that makes you feel.", "See it. Feel it. Live it."],
+        ["When you really imagine yourself somewhere else, your body will respond as if you’re there."]
       ]
     ],
-    quotes: [["angry quote 1"], ["angry quote 2"]],
+    quotes: [
+      ["'Do not let your anger lead to hatred, as you will hurt yourself more than you would the other.' - Stephen Richards"],
+      ["'Impatience is the breeding ground of anger.' - Ketan R Shah"]
+      ["'The greatest remedy for anger is delay.' - Thomas Paine"]
+      ["'Speak when you are angry – and you’ll make the best speech you’ll ever regret.' - Laurence J. Peter"]
+      ["'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.' - Buddha"]
+      ["'For every minute you are angry you lose sixty seconds of happiness.' - Ralph Waldo Emerson"]
+      ],
     stories: ["angry story 1", "angry story 2"]
   },
   happy: {
