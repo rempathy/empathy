@@ -285,7 +285,7 @@ function receivedMessage(event) {
         console.log("Within the SendText for COMEDY PAYLOAD");
         console.log("recipient", recipientID);
         console.log("sender", senderId);
-        sendTextMessage(recipientID, "comedy selected");      
+        sendTextMessage(senderID, "comedy selected");      
       }
     };
 
