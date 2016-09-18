@@ -301,8 +301,9 @@ function receivedMessage(event) {
           getDots(senderID);
 
         },
-        DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA: function sendText2 (senderId){
-          console.log("SOMETHIGN WHATVER LOL")
+        DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION: function sendText2 (senderId){
+          console.log("HIT THE ASSETS INTIALIZATION-- LINE 299 ")
+          getDots(senderID);
         }
 
       };
