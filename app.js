@@ -288,7 +288,9 @@ function receivedMessage(event) {
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP: function sendBreathingExercise(recipientID){
         getDots(recipientID);
-        setTimeout(function(){sendTextMessage(recipientID, "Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6."),2000};
+        setTimeout(function(){
+          sendTextMessage(recipientID, "Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.");
+        },2000);
         setTimeout(function(){
           getDots(recipientID);
           sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
