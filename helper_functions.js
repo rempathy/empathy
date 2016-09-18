@@ -7,7 +7,10 @@ var emotions = {
         ["Doctors say it best: slowing your breathing calms your emotions."]
       ],
       [
-        "angry exercise 2", "ae description 2"]
+        ["Think of one of your role models. Ask yourself: 'What would they do right now?'"],
+        ["Let their wisdom be your wisdom."],
+        ["Changing your perspective can shift your energy!"]
+      ]
     ],
     quotes: [["angry quote 1"], ["angry quote 2"]],
     stories: ["angry story 1", "angry story 2"]
