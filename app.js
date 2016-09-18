@@ -278,7 +278,19 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    sendTextMessage(senderID, "Quick reply tapped");
+    var assets = {
+      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
+
+        // sendQuickEmotion(recipientID);
+        console.log("Within the SendText for COMEDY PAYLOAD");
+        console.log("recipient", recipientID);
+        console.log("sender", senderId);
+        sendTextMessage(recipientID, "comedy selected");      
+      }
+    };
+
+    assets[quickReplyPayload](senderID);
+    // sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
 
@@ -409,21 +421,12 @@ function receivedPostback(event) {
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
 
-  var assets = {
-    DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
 
-      // sendQuickEmotion(recipientID);
-      console.log("Within the SendText for COMEDY PAYLOAD");
-      console.log("recipient", recipientID);
-      console.log("sender", senderId);
-      sendTextMessage(recipientID, "comedy selected");      
-    }
-  };
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
 
-  assets[payload](senderID);
-  // sendTextMessage(senderID, "Postback called");
+  // assets[payload](senderID);
+  sendTextMessage(senderID, "Postback called");
 }
 
 /*
