@@ -17,7 +17,8 @@ const
   express = require('express'),
   https = require('https'),  
   request = require('request'),
-  helpers = require('helper_functions');
+  helpers = require('helper_functions'),
+  stories = require('stories');
   // Wit = require('node-wit').Wit;
 
 
@@ -296,17 +297,18 @@ function receivedMessage(event) {
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
 
-          sendQuickEmotion(senderId);
+          sendQuickEmotion(recipientID);
           console.log("Within the SendText for COMEDY PAYLOAD");
           console.log("recipient", recipientID);
           console.log("sender", senderId);
 
-        }
+        },
+
       };
       // When a postback is called, we'll send a message back to the sender to 
       // let them know it was successful
 
-      assets[quickReplyPayload](senderID);
+      assets[payload](senderID);
     // sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -342,7 +344,7 @@ function receivedMessage(event) {
         break;
 
       case 'quickemotion':
-        sendQuickEmotion(senderID);
+        stories.sendQuickEmotion(senderID);
         break;
 
       case 'button':
@@ -433,22 +435,10 @@ function receivedPostback(event) {
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
-
-  var assets = {
-    DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
-
-      sendQuickEmotion(recipientID);
-      console.log("Within the SendText for COMEDY PAYLOAD");
-      console.log("recipient", recipientID);
-      console.log("sender", senderId);
-
-    }
-  };
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
 
-  assets[payload](senderID);
-  // sendTextMessage(senderID, "Postback called");
+  sendTextMessage(senderID, "Postback called");
 }
 
 /*
@@ -1006,7 +996,7 @@ function callSendAPI(messageData) {
     } else {
       // console.log("IN ELSE BLOCK!!! ")
       // console.log("RESPONSE IS ", response);
-      console.log(response.error);
+      console.error(response.error);
     }
   });  
 }
