@@ -299,7 +299,7 @@ function receivedMessage(event) {
         },4000)
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES: function(recipientID){
-        sendTextMessage(recipientID, "Doctors say whatever");
+        sendTextMessage(recipientID, "Doctors say it best: slowing your breathing calms your emotions.");
       }
     };
 
