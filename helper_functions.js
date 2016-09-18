@@ -42,12 +42,12 @@ var emotions = {
   }
 };
 
-var remedies = ['exercises', 'quotes', 'stories']
+var remedies = ['exercises', 'quotes', 'stories'];
 
 // return a random type of remedy
 var randomRemedy = function() {
   return remedies[Math.floor(Math.random()*remedies.length)]
-}
+};
 
 // return a random card from the specified emotion and remedy
 var getCard = function(emotion, remedy) {
@@ -73,7 +73,7 @@ var getMoreInfo = function(card) {
 // quotes do not have an intro or MoreInfo
 var getQuote = function(card) {
   return card[0]
-}
+};
 
 
 module.exports = {
