@@ -418,9 +418,22 @@ function receivedPostback(event) {
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
+
+  var assets = {
+    DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
+
+      sendQuickEmotion(recipientID);
+      console.log("Within the SendText for COMEDY PAYLOAD");
+      console.log("recipient", recipientID);
+      console.log("sender", senderId);
+      
+    }
+  };
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+
+  assets[payload](senderID);
+  // sendTextMessage(senderID, "Postback called");
 }
 
 /*
