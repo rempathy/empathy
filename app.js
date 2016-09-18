@@ -281,9 +281,10 @@ function receivedMessage(event) {
     var assets = {
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANGER: function sendAngerResponse(recipientID){
   
-        getDots(recipientID);
+        // getDots(recipientID);
         sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
-        getDots(recipientID);
+        // getDots(recipientID);
+        sendBreathingQuery(recipientID);
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_THUMBS_UP: function sendBreathingExercise(recipientID){
         sendTextMessage(recipientID, "Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.");
