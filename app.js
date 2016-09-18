@@ -279,13 +279,15 @@ function receivedMessage(event) {
       messageId, quickReplyPayload);
 
     var assets = {
-      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
+      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANGER: function sendAngerResponse(recipientID){
 
         // sendQuickEmotion(recipientID);
-        console.log("Within the SendText for COMEDY PAYLOAD");
+        // console.log("Within the SendText for COMEDY PAYLOAD");
         console.log("recipient", recipientID);
         console.log("sender", senderId);
-        sendTextMessage(senderID, "comedy selected");      
+        getDots(recipientID);
+        sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
+        getDots(recipientID);
       }
     };
 
@@ -400,7 +402,12 @@ function receivedDeliveryConfirmation(event) {
 }
 
 
-
+function getDots(senderId){
+  sendTypingOn(senderId);
+  setTimeout(function(){
+    sendTypingOff(senderId);
+  }, 2500);
+}
 /*
  * Postback Event
  *
@@ -631,53 +638,53 @@ function sendButtonMessage(recipientId) {
   callSendAPI(messageData);
 }
 
-function sendEmotionQuery(recipientId) {
-  console.log("SENDEMTIONQUERY INVOKED, recipientID", recipientId);
+// function sendEmotionQuery(recipientId) {
+//   console.log("SENDEMTIONQUERY INVOKED, recipientID", recipientId);
 
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: "How are you feeling?",
-          buttons:[{
-            type: "web_url",
-            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "😡"
-          },
-          {
-            type: "phone_number",
-            title: "Suicidal",
-            payload: "+18002738255"
-          },
-          {
-            type: "web_url",
-            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "😒"
-          }, 
-          {
-            type: "web_url",
-            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "😍"
-          },
-          {
-            type: "web_url",
-            url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
-            title: "😭"
-          }]
-        }
-      }
-    }
-  };  
+//   var messageData = {
+//     recipient: {
+//       id: recipientId
+//     },
+//     message: {
+//       attachment: {
+//         type: "template",
+//         payload: {
+//           template_type: "button",
+//           text: "How are you feeling?",
+//           buttons:[{
+//             type: "web_url",
+//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+//             title: "😡"
+//           },
+//           {
+//             type: "phone_number",
+//             title: "Suicidal",
+//             payload: "+18002738255"
+//           },
+//           {
+//             type: "web_url",
+//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+//             title: "😒"
+//           }, 
+//           {
+//             type: "web_url",
+//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+//             title: "😍"
+//           },
+//           {
+//             type: "web_url",
+//             url: "https://media.giphy.com/media/SHyuhBtRr8Zeo/giphy.gif",
+//             title: "😭"
+//           }]
+//         }
+//       }
+//     }
+//   };  
 
-  console.log(messageData);
+//   console.log(messageData);
 
-  callSendAPI(messageData);
-}
+//   callSendAPI(messageData);
+// }
 
 
 /*
@@ -806,7 +813,7 @@ function sendQuickEmotion(recipientId) {
       id: recipientId
     },
     message: {
-      text: "Which emoji represents your current emotion?",
+      text: "How are you feeling?",
       metadata: "DEVELOPER_DEFINED_METADATA",
       quick_replies: [
         {
@@ -921,6 +928,7 @@ function sendTypingOff(recipientId) {
 function sendInitialResponse(recipientID){
   console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
+  sendDots(recipientID);
   setTimeout(function(){sendQuickEmotion(recipientID)}, 3000);
 }
 
