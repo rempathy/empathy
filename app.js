@@ -293,14 +293,12 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
+// Demo Tree
+
 
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
-          sendTypingOn(senderID);
-          setTimeout(function() {
-            sendTypingOff(senderID)
-          }, 1000)
-
+          getDots(senderID);
 
         },
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA: function sendText2 (senderId){
@@ -345,6 +343,10 @@ function receivedMessage(event) {
       case 'emotion':
         sendEmotionQuery(senderID);
         break;
+
+      case 'I hate my ex':
+        sendInitialResponse(senderID);
+        break
 
       case 'quickemotion':
         sendQuickEmotion(senderID);
@@ -399,6 +401,13 @@ function receivedMessage(event) {
  * these fields at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-delivered
  *
  */
+function getDots(senderID) {
+  sendTypingOn(senderID);
+  setTimeout(function() {
+    sendTypingOff(senderID)
+  }, 2500)
+}
+
 function receivedDeliveryConfirmation(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -692,6 +701,13 @@ function sendEmotionQuery(recipientId) {
   console.log(messageData);
 
   callSendAPI(messageData);
+}
+
+function sendInitialResponse(recipientId) {
+    console.log("SENDINITIALRESPONSE INVOKED, recipientID", recipientId);
+    sendTextMessage(recipientID, "Sorry to hear that.")
+    getDots(recipientID);
+
 }
 
 
