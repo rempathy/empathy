@@ -793,7 +793,7 @@ function sendBreathingQuery(recipientId) {
   callSendAPI(messageData);
 }
 
-function sendHelpfulQuery(recipientID){
+function sendHelpfulQuery(recipientId){
   var messageData = {
     recipient: {
       id: recipientId
