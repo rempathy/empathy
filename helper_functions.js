@@ -42,70 +42,38 @@ var emotions = {
   }
 };
 
-var seen = {
-  angry: {
-    exercises: [],
-    quotes: [],
-    stories: []
-  },
-  happy: {
-    exercises: [],
-    quotes: [],
-    stories: []},
-  sad: {
-    exercises: [],
-    quotes: [],
-    stories: []
-  }
-};
+var remedies = ['exercises', 'quotes', 'stories']
 
-var accessEmotion = function(emotion) {
-  return emotions[emotion]
-};
+// return a random type of remedy
+var randomRemedy = function() {
+  return remedies[Math.floor(Math.random()*remedies.length)]
+}
 
-// return a random type of remedies for the input emotion
-var chooseRemedy = function(emotion) {
-  var result;
-  var count = 0;
-  for (var remedy in emotion)
-      if (Math.random() < 1/++count)
-         result = emotion[remedy];
-  return result;
-};
-
-// return a random card from the chosen emotion and remedy categories unless all the cards have been viewed
-var accessCard = function(emotion, remedy) {
-  var random;
+// return a random card from the specified emotion and remedy
+var getCard = function(emotion, remedy) {
   var total_options = emotions[emotion][remedy].length;
-  var record = seen[emotion][remedy];
-  if(record.length < total_options) {
-    if (record.length == 0) {
-      random = Math.floor(Math.random()*total_options)
-    }
-    while (record.indexOf(random) != -1) {
-      random = Math.floor(Math.random()*total_options)
-    }
-    seen[emotion][remedy].push(random)
-    // returns the whole array [remedy, more info about it]
-    // wait for the user to ask for more info or moveing on before dumping this info
-    return accessEmotion(emotion)[remedy][random]
-  }
+  return emotions[emotion][remedy][Math.floor(Math.random()*total_options)]
 };
 
-// get the remedy from the chosen categories
-var getRemedy = function(emotion, remedy) {
-  return accessCard(emotion, remedy)[0]
+// return an array of intro messages from the chosen card 
+var getIntro = function(card) {
+  return card[0]
 };
 
-// get additional info about the remedy in the chosen categories
-var getMoreInfo = function(emotion, remedy) {
-  var data = accessCard(emotion, remedy);
-  if (data.length > 1) {
-    return data[1]
-  } else {
-    return "sorry, I don't know more about this topic"
-  }
+// return an array of remedy messages from the chosen card 
+var getRemedy = function(card) {
+  return card[1]
 };
+
+// return an array of the extra info messages from the chosen card 
+var getMoreInfo = function(card) {
+  return card[2]
+};
+
+// quotes do not have an intro or MoreInfo
+var getQuote = function(card) {
+  return card[0]
+}
 
 
 module.exports = {
