@@ -309,6 +309,7 @@ function receivedMessage(event) {
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP: function(recipientID){
         sendTextMessage(recipientID, "See you soon");
+        sendCatGif(recipientID);
       }
     };
 
@@ -505,6 +506,25 @@ function sendGifMessage(recipientId) {
   };
 
   callSendAPI(messageData);
+}
+
+function sendCatGif(recipientId){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "image",
+        payload: {
+          url: "https://media.giphy.com/media/PF4NopbRuZj8I/giphy.gif"
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+
 }
 
 function sendMeditationGif(recipientId) {
