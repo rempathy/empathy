@@ -280,11 +280,7 @@ function receivedMessage(event) {
 
     var assets = {
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ANGER: function sendAngerResponse(recipientID){
-
-        // sendQuickEmotion(recipientID);
-        // console.log("Within the SendText for COMEDY PAYLOAD");
-        console.log("recipient", recipientID);
-        console.log("sender", senderId);
+  
         getDots(recipientID);
         sendTextMessage(recipientID, "Taking deep breaths has been shown to help...");
         getDots(recipientID);
@@ -406,7 +402,7 @@ function getDots(senderId){
   sendTypingOn(senderId);
   setTimeout(function(){
     sendTypingOff(senderId);
-  }, 2500);
+  }, 1900);
 }
 /*
  * Postback Event
