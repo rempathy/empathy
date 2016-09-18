@@ -296,7 +296,7 @@ function receivedMessage(event) {
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
 
-          sendQuickEmotion(recipientID);
+          sendQuickEmotion(senderId);
           console.log("Within the SendText for COMEDY PAYLOAD");
           console.log("recipient", recipientID);
           console.log("sender", senderId);
@@ -1006,7 +1006,7 @@ function callSendAPI(messageData) {
     } else {
       // console.log("IN ELSE BLOCK!!! ")
       // console.log("RESPONSE IS ", response);
-      console.error(response.error);
+      console.log(response.error);
     }
   });  
 }
