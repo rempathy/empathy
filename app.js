@@ -291,15 +291,21 @@ function receivedMessage(event) {
         setTimeout(function(){
           sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
           setTimeout(function(){
-            sendTextMessage(recipientID, "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy.");
+            sendTextMessage(recipientID, "Place one hand on your belly and repeat 5 more times. Easy peasy.");
             setTimeout(function(){
               sendHelpfulQuery(recipientID);
-            }, 1000);
-          },2500)
-        },4000)
+            }, 5000);
+          },3000)
+        },4500)
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES: function(recipientID){
         sendTextMessage(recipientID, "Doctors say it best: slowing your breathing calms your emotions.");
+        sendMeditationGif(recipientID);
+        setTimeout(function(){sendCheckUpQuery(recipientID);}, 2000);
+
+      },
+      DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP: function(recipientID){
+        sendTextMessage(recipientID, "🎅");
       }
     };
 
@@ -498,6 +504,23 @@ function sendGifMessage(recipientId) {
   callSendAPI(messageData);
 }
 
+function sendMeditationGif(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "image",
+        payload: {
+          url: 'https://media.giphy.com/media/CQDmX4bCoJTNK/giphy.gif'
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
 /*
  * Send audio using the Send API.
  *
@@ -760,6 +783,32 @@ function sendQuickEmotion(recipientId) {
           "title":"😊",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_HAPPY"
         },
+      ]
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+function sendCheckUpQuery(recipientId){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: "Why don't I check up with you in a few hours?",
+      metadata: "DEVELOPER_DEFINED_METADATA",
+      quick_replies: [
+        {
+          "content_type":"text",
+          "title":"✅",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP"
+        },
+        {
+          "content_type":"text",
+          "title":"❌",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_DOWN"
+        }
       ]
     }
   };
