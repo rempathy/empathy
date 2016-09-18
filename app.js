@@ -395,7 +395,7 @@ function getDots(senderId){
   sendTypingOn(senderId);
   setTimeout(function(){
     sendTypingOff(senderId);
-  }, 4000);
+  }, 7000);
 }
 /*
  * Postback Event
