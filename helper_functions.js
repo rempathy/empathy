@@ -1,33 +1,44 @@
 var emotions = {
   angry: {
-    exercises: [["angry exercise 1", 'ae description 1'], ["angry exercise 2", "ae description 2"]], 
-    quotes: [["angry quote 1"], ["angry quote 2"]], 
+    exercises: [
+      [
+        ["Taking deep breaths has been shown to help..."],
+        ["Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.", "Inhale slowly for a count of 4.", "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy."],
+        ["Doctors say it best: slowing your breathing calms your emotions."]
+      ],
+      [
+        ["Think of one of your role models. Ask yourself: 'What would they do right now?'"],
+        ["Let their wisdom be your wisdom."],
+        ["Changing your perspective can shift your energy!"]
+      ]
+    ],
+    quotes: [["angry quote 1"], ["angry quote 2"]],
     stories: ["angry story 1", "angry story 2"]
   },
   happy: {
-    exercises: ["happy exercise 1", "happy exercise 2"], 
-    quotes: ["happy quote 1", "happy quote 2"], 
+    exercises: ["happy exercise 1", "happy exercise 2"],
+    quotes: ["happy quote 1", "happy quote 2"],
     stories: ["happy story 1", "happy story 2"]},
   sad: {
-    exercises: ["sad exercise 1", "sad exercise 2"], 
-    quotes: ["sad quote 1", "sad quote 2"], 
+    exercises: ["sad exercise 1", "sad exercise 2"],
+    quotes: ["sad quote 1", "sad quote 2"],
     stories: ["sad story 1", "sad story 2"]
   }
 };
 
 var seen = {
   angry: {
-    exercises: [], 
-    quotes: [], 
+    exercises: [],
+    quotes: [],
     stories: []
   },
   happy: {
-    exercises: [], 
-    quotes: [], 
+    exercises: [],
+    quotes: [],
     stories: []},
   sad: {
-    exercises: [], 
-    quotes: [], 
+    exercises: [],
+    quotes: [],
     stories: []
   }
 };
@@ -65,7 +76,7 @@ var accessCard = function(emotion, remedy) {
   }
 };
 
-// get the remedy from the chosen categories 
+// get the remedy from the chosen categories
 var getRemedy = function(emotion, remedy) {
   return accessCard(emotion, remedy)[0]
 };
