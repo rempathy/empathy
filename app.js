@@ -293,10 +293,10 @@ function receivedMessage(event) {
         },2000);
         setTimeout(function(){
           getDots(recipientID);
-          sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
+          setTimeout(function(){sendTextMessage(recipientID,"Exhale slowly for a count of 4.");},500);
           setTimeout(function(){
             getDots(recipientID);
-            sendTextMessage(recipientID, "Place one hand on your belly and repeat 5 more times. Easy peasy.");
+             setTimeout(function(){sendTextMessage(recipientID, "Place one hand on your belly and repeat 5 more times. Easy peasy.");},500);
             setTimeout(function(){
               sendHelpfulQuery(recipientID);
             }, 5000);
@@ -304,10 +304,10 @@ function receivedMessage(event) {
         },4500);
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YES: function(recipientID){
-        sendTextMessage(recipientID, "Doctors say it best: slowing your breathing calms your emotions.");
+        getDots(recipientID);
+        setTimeout(function(){sendTextMessage(recipientID, "Doctors say it best: slowing your breathing calms your emotions.");}, 1000);
         sendMeditationGif(recipientID);
         setTimeout(function(){sendCheckUpQuery(recipientID);}, 3000);
-
       },
       DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHECK_UP: function(recipientID){
         sendTextMessage(recipientID, "See you soon");
@@ -982,7 +982,7 @@ function sendTypingOff(recipientId) {
 function sendInitialResponse(recipientID){
   // console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
-  getDots(recipientID);
+  setTimeout(function(){getDots(recipientID);},1000);
   setTimeout(function(){sendQuickEmotion(recipientID)}, 5000);
 }
 
