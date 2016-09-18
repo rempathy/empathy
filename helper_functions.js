@@ -19,13 +19,17 @@ var emotions = {
     ],
     quotes: [
       ["'Do not let your anger lead to hatred, as you will hurt yourself more than you would the other.' - Stephen Richards"],
-      ["'Impatience is the breeding ground of anger.' - Ketan R Shah"]
-      ["'The greatest remedy for anger is delay.' - Thomas Paine"]
-      ["'Speak when you are angry – and you’ll make the best speech you’ll ever regret.' - Laurence J. Peter"]
-      ["'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.' - Buddha"]
+      ["'Impatience is the breeding ground of anger.' - Ketan R Shah"],
+      ["'The greatest remedy for anger is delay.' - Thomas Paine"],
+      ["'Speak when you are angry – and you’ll make the best speech you’ll ever regret.' - Laurence J. Peter"],
+      ["'Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.' - Buddha"],
       ["'For every minute you are angry you lose sixty seconds of happiness.' - Ralph Waldo Emerson"]
-      ],
-    stories: ["angry story 1", "angry story 2"]
+    ],
+    stories: [
+      ["'I’m just trying to make people’s lives a little bit weirder...'"],
+      ["imageplaceholder", "'During the week I’m a supervisor at an insurance company.'", "'I’ve got to hide my identity because I have four people working under me. I think it would be hard to hold the team together if they saw me like this.'"],
+      ["'followup'"]
+    ]
   },
   happy: {
     exercises: ["happy exercise 1", "happy exercise 2"],
