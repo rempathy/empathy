@@ -292,9 +292,9 @@ function receivedMessage(event) {
           sendTextMessage(recipientID,"Exhale slowly for a count of 4.");
           setTimeout(function(){
             sendTextMessage(recipientID, "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy.");
-            sendTimeout(function(){
+            setTimeout(function(){
               sendHelpfulQuery(recipientID);
-            })
+            }, 1000);
           },2500)
         },4000)
       },
