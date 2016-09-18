@@ -297,7 +297,7 @@ function receivedMessage(event) {
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
 
-          sendQuickEmotion(recipientID);
+          sendQuickEmotion(senderId);
           console.log("Within the SendText for COMEDY PAYLOAD");
           console.log("recipient", recipientID);
           console.log("sender", senderId);
@@ -308,7 +308,7 @@ function receivedMessage(event) {
       // When a postback is called, we'll send a message back to the sender to 
       // let them know it was successful
 
-      assets[payload](senderID);
+      assets[quickReplyPayload](senderID);
     // sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
