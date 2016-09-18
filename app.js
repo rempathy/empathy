@@ -394,9 +394,9 @@ function receivedDeliveryConfirmation(event) {
 
 function getDots(senderId){
   sendTypingOn(senderId);
-  setTimeout(function(){
-    sendTypingOff(senderId);
-  }, 7000);
+  // setTimeout(function(){
+  //   sendTypingOff(senderId);
+  // }, 7000);
 }
 /*
  * Postback Event
@@ -981,7 +981,7 @@ function sendInitialResponse(recipientID){
   // console.log("SEND INTIIAL RESponse, recipientID", recipientID);
   sendTextMessage(recipientID, "Sorry to hear that.");
   getDots(recipientID);
-  setTimeout(function(){sendQuickEmotion(recipientID)}, 2000);
+  setTimeout(function(){sendQuickEmotion(recipientID)}, 5000);
 }
 
 /*
