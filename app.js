@@ -296,11 +296,11 @@ function receivedMessage(event) {
 
       var assets = {
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY: function sendText(senderId){
+          sendTypingOn(recipientID);
+          setTimeout(function() {
+            sendTypingOff(recipientID)
+          }, 1000)
 
-          sendQuickEmotion(senderId);
-          console.log("Within the SendText for COMEDY PAYLOAD");
-          console.log("recipient", recipientID);
-          console.log("sender", senderId);
 
         },
         DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA: function sendText2 (senderId){

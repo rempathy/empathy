@@ -78,7 +78,6 @@ var getQuote = function(card) {
 
 module.exports = {
   emotions: emotions,
-  seen: seen,
   accessEmotion: accessEmotion,
   chooseRemedy: chooseRemedy,
   accessCard: accessCard,
