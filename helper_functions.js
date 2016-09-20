@@ -60,11 +60,12 @@ var getCard = function(emotion, remedy) {
     // I don't know how to test it online but it will console.log(message) the correct messages
     // senderID may need to be changed to recipientID
 function sendMessages(collection, index) {
-  getDots(senderID)
+  // getDots(senderID)
   if(index <= collection.length) {
     setTimeout(function(){
       message = collection[index]
-      sendTextMessage(senderID, message)
+      // sendTextMessage(senderID, message)
+      console.log(message)
       sendMessages(collection, ++index)
     }, 2000);
   }
@@ -72,24 +73,40 @@ function sendMessages(collection, index) {
 
 // send messages associated to the exercise-intro
 function displayExerciseIntro(card) {
-  sendMessages(card.intro, 0)
+  sendMessages(card.intro, 0);
 };
 
 // send messages associated with the exercise-content
 function displayExercise(card) {
-  sendMessages(card.exercise, 0)
+  sendMessages(card.exercise, 0);
 };
 
 // sends messages associated with the exercise-followup
 function displayExerciseFollowup(card) {
-  sendMessages(card.followup, 0)
-}
+  sendMessages(card.followup, 0);
+};
 
-var card = getCard('angry', 'exercises');
-console.log(card)
+// sends a story
+function displayStory(card) {
+  sendMessages(card, 0)
+};
+
+// sends the quote
+function displayQuote(card) {
+  getDots();
+  setTimeout(function(){
+    sendTextMessage(senderID, card[0])
+  }, 2000);
+};
+
+
+// EXAMPLE: to return a random exercise to aleviate anger
+// card = getCard('angry', 'exercises')
+// displayExerciseIntro(card)
+  // do they want to continue with the exercise? 
 // displayExercise(card)
-
-//TODO make displayStory and displayQuote functions to display random quotes or stories
+  // did the exercise help?
+// displayExerciseFollowup(card)
 
 module.exports = {
   emotions: emotions,
