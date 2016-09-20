@@ -1,21 +1,21 @@
 var emotions = {
   angry: {
     exercises: [
-      [
-        ["Taking deep breaths has been shown to help..."],
-        ["Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.", "Inhale slowly for a count of 4.", "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy."],
-        ["Doctors say it best: slowing your breathing calms your emotions."]
-      ],
-      [
-        ["Think of one of your role models. Ask yourself: 'What would they do right now?'"],
-        ["Let their wisdom be your wisdom."],
-        ["Changing your perspective can shift your energy!"]
-      ],
-      [
-        ["Where’s your favorite place to be?"],
-        ["Imagine you’re there right now...", "Think of all the things you love about it, and how that makes you feel.", "See it. Feel it. Live it."],
-        ["When you really imagine yourself somewhere else, your body will respond as if you’re there."]
-      ]
+      { 
+        intro: ["Taking deep breaths has been shown to help..."],
+        exercise: ["Let’s do it now, it’s easy!  Breathe deep into your belly for a slow count of 6.", "Inhale slowly for a count of 4.", "Place one hand on your belly and repeat above exhale and inhale 5 more times. Easy peasy."],
+        followup: ["Doctors say it best: slowing your breathing calms your emotions."]
+      },
+      {
+        intro: ["Think of one of your role models. Ask yourself: 'What would they do right now?'"],
+        exercise: ["Let their wisdom be your wisdom."],
+        followup: ["Changing your perspective can shift your energy!"]
+      },
+      {
+        intro: ["Where’s your favorite place to be?"],
+        exercise: ["Imagine you’re there right now...", "Think of all the things you love about it, and how that makes you feel.", "See it. Feel it. Live it."],
+        followup: ["When you really imagine yourself somewhere else, your body will respond as if you’re there."]
+      }
     ],
     quotes: [
       ["'Do not let your anger lead to hatred, as you will hurt yourself more than you would the other.' - Stephen Richards"],
@@ -55,26 +55,58 @@ var getCard = function(emotion, remedy) {
   return emotions[emotion][remedy][Math.floor(Math.random()*total_options)]
 };
 
-// return an array of intro messages from the chosen card 
-var getIntro = function(card) {
-  return card[0]
+
+// send the input message collection with dots and a 2 second interval between messages
+    // I don't know how to test it online but it will console.log(message) the correct messages
+    // senderID may need to be changed to recipientID
+function sendMessages(collection, index) {
+  // getDots(senderID)
+  if(index <= collection.length) {
+    setTimeout(function(){
+      message = collection[index]
+      // sendTextMessage(senderID, message)
+      console.log(message)
+      sendMessages(collection, ++index)
+    }, 2000);
+  }
+}
+
+// send messages associated to the exercise-intro
+function displayExerciseIntro(card) {
+  sendMessages(card.intro, 0);
 };
 
-// return an array of remedy messages from the chosen card 
-var getRemedy = function(card) {
-  return card[1]
+// send messages associated with the exercise-content
+function displayExercise(card) {
+  sendMessages(card.exercise, 0);
 };
 
-// return an array of the extra info messages from the chosen card 
-var getMoreInfo = function(card) {
-  return card[2]
+// sends messages associated with the exercise-followup
+function displayExerciseFollowup(card) {
+  sendMessages(card.followup, 0);
 };
 
-// quotes do not have an intro or MoreInfo
-var getQuote = function(card) {
-  return card[0]
+// sends a story
+function displayStory(card) {
+  sendMessages(card, 0)
 };
 
+// sends the quote
+function displayQuote(card) {
+  getDots();
+  setTimeout(function(){
+    sendTextMessage(senderID, card[0])
+  }, 2000);
+};
+
+
+// EXAMPLE: to return a random exercise to aleviate anger
+// card = getCard('angry', 'exercises')
+// displayExerciseIntro(card)
+  // do they want to continue with the exercise? 
+// displayExercise(card)
+  // did the exercise help?
+// displayExerciseFollowup(card)
 
 module.exports = {
   emotions: emotions,
